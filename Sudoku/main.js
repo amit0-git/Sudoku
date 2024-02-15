@@ -3,6 +3,13 @@ var errorCount = 0;
 var emptyCells = new Array(81).fill(null);
 
 
+//sound assets
+
+var countMusic=new Audio("assets/mixkit-positive-interface-beep-221.wav")
+var winMusic=new Audio("assets/win.wav")
+
+var errorCord = [] // for storing the error cordinates 
+var tmpErrorCord = []
 
 function createInputBoxes(row, blockNumber) {
     //function to create input boxes
@@ -27,6 +34,9 @@ function createInputBoxes(row, blockNumber) {
 
 
 }
+
+
+
 //generate input boxes for all the blocks
 for (var i = 1; i <= 3; i++) {
     for (var j = 1; j <= 3; j++) {
@@ -57,6 +67,15 @@ function initializeMatrix() {
 var matrix = initializeMatrix();
 
 
+//function to update the cell for getting the clicked cell
+function updateCell(row, col, event) {
+    console.log(event.target.value, row, col)
+    cell[0] = row;
+    cell[1] = col;
+
+    console.log(cell)
+}
+
 //add onclick function to inp
 var inp = document.getElementsByClassName("inp");
 var inp1 = Array.from(inp)
@@ -67,6 +86,7 @@ for (let i = 0; i < 9; i++) {
         };
     }
 }
+
 
 
 
@@ -186,6 +206,8 @@ function numInArray(num, array) {
     return false;
 }
 
+
+
 function getNuniqueValues(n) {
     //get unique n values
     var arr = [];
@@ -210,73 +232,13 @@ function getNuniqueValues(n) {
 }
 
 
-
-
-//initialize the array with random numbers
-
-
-var inp = document.getElementsByClassName("inp");
-
-for (var i = 0; i < 9; i++) {
-
-    var uniqueArr = getNuniqueValues(4);
-
-    // for (var j = 0; j < 9; j++) {
-
-
-    for (var k = 0; k < uniqueArr.length; k++) {
-
-        var row = box[i][uniqueArr[k]][0]
-        var col = box[i][uniqueArr[k]][1]
-
-
-        var num = mapToNumber(row, col);
-        emptyCells[num] = 1;
-        inp[num].style.backgroundColor = "red";
-        var ans = fill(row, col);
-
-        matrix[row][col] = ans;
-
-        inp[num].value = ans;
-
-
-
-
-
-    }
-
-
-
-    // }
-}
-
-
-
-
-function fill(row, col) {
-    var num = 1;
-
-    for (var i = 0; i <9; i++) {
-        var status = fillingCheckAlgo(row, col, num);
-        if (status) {
-
-            return num;
-        }
-
-        else {
-            num = num + 1;
-        }
-    }
-}
-
-
+//function to check whether the num can be inserted in the cell 
+//after checking in the block, row and column
 
 function fillingCheckAlgo(row, col, num) {
 
     //check the filling number in the 
     // 1. row
-
-
 
     var r, c;
 
@@ -333,22 +295,100 @@ function fillingCheckAlgo(row, col, num) {
 
 }
 
+//backtracking algo to fill the sudoku
+
+
+function solve(matrix) {
+
+    for (var row = 0; row < 9; row++) {
+
+        for (var col = 0; col < 9; col++) {
 
 
 
 
-console.log("Matric", matrix)
+            if (emptyCells[row * 9 + col] === null) {
+
+                for (var val = 1; val <= 9; val++) {
+                    // Check if it is safe to fill
+                    if (fillingCheckAlgo(row, col, val)) {
+                        matrix[row][col] = val;
+                        emptyCells[row * 9 + col] = 1;
+
+                        //update the ui
+
+                        inp1[row * 9 + col].value = val;
+
+                        var solveFurther = solve(matrix);
 
 
 
-//Note: Apply the row approach
+
+
+                        if (solveFurther) {
+                            return true;
+                        } else {
+                            matrix[row][col] = null;
+
+                            emptyCells[row * 9 + col] = null;
+                            inp1[row * 9 + col].value = "";
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+//ans matrix to store the ans
+
+solve(matrix); //generate the sudoku
+
+var ans = JSON.parse(JSON.stringify(matrix));
+
+console.log("Matrix", ans)
 
 
 
 
-//game playing and filling part
-var inp = document.getElementsByClassName("inp");
-var inp1 = Array.from(inp)
+
+
+
+//now remove some random cells from each block 
+for (var i = 0; i < 9; i++) {
+
+    var unique = getNuniqueValues(4);
+
+    for (var j = 0; j < unique.length; j++) {
+        var row = parseInt(box[i][unique[j]][0])
+        var col = parseInt(box[i][unique[j]][1])
+
+        inp1[row * 9 + col].value = ""
+        emptyCells[row * 9 + col] = null;
+        matrix[row][col] = null;
+
+    }
+
+}
+
+
+
+
+
+
+var emptyCellsForEditing = JSON.parse(JSON.stringify(emptyCells));
+
+
+//update the bg color of the initilized cells 
+
+for (var i = 0; i < 81; i++) {
+
+    if (emptyCells[i] != null) {
+        inp1[i].style.backgroundColor = "#038aff";
+    }
+}
 
 
 var but = document.getElementsByClassName("but")
@@ -360,13 +400,15 @@ Array.from(but).forEach((element) => {
 
 
 function fillCell(event) {
+
     console.log("Control Clicked", event.target.textContent)
+    console.log("editing", emptyCellsForEditing)
 
     var r = cell[0];
     var c = cell[1];
     var num = parseInt(event.target.textContent);
 
-    if (emptyCells[r * 9 + c] == null) {
+    if (emptyCellsForEditing[r * 9 + c] == null) {
 
 
         inp1[r * 9 + c].value = num;
@@ -382,61 +424,11 @@ function fillCell(event) {
         checkWinner();
 
 
+
+
     }
 
 }
-
-
-
-
-
-
-
-
-function updateCell(row, col, event) {
-    console.log(event.target.value, row, col)
-    cell[0] = row;
-    cell[1] = col;
-
-    console.log(cell)
-}
-
-
-
-
-var errorCord = []
-var tmpErrorCord = []
-
-function removeDuplicateColor() {
-
-    for (var i = 0; i < tmpErrorCord.length; i++) {
-        r = tmpErrorCord[i][0];
-        c = tmpErrorCord[i][1]
-        inp1[r * 9 + c].style.border = "none";
-
-    }
-
-    tmpErrorCord = [];
-
-}
-
-function updateDuplicateCellColor() {
-    var r, c;
-    tmpErrorCord = [...errorCord]
-
-    for (var i = 0; i < errorCord.length; i++) {
-        r = errorCord[i][0];
-        c = errorCord[i][1]
-        inp1[r * 9 + c].style.border = "5px solid blue";
-
-    }
-    console.log("tmp", tmpErrorCord)
-
-
-
-
-}
-
 
 function fillingUpdateAlgo(row, col, num) {
     errorCord = []
@@ -522,10 +514,72 @@ function removeDuplicates(nestedArray) {
         return index === foundIndex;
     });
 }
-console.log("empty cells", emptyCells)
+
+
+function removeDuplicateColor() {
+
+    for (var i = 0; i < tmpErrorCord.length; i++) {
+        r = tmpErrorCord[i][0];
+        c = tmpErrorCord[i][1]
+        inp1[r * 9 + c].style.border = "none";
+
+    }
+
+    tmpErrorCord = [];
+
+}
+
+function updateDuplicateCellColor() {
+    var r, c;
+    tmpErrorCord = [...errorCord]
+
+    for (var i = 0; i < errorCord.length; i++) {
+        r = errorCord[i][0];
+        c = errorCord[i][1]
+        inp1[r * 9 + c].style.border = "5px solid red";
+
+    }
+    console.log("tmp", tmpErrorCord)
 
 
 
+
+}
+
+
+
+
+function solve11(matrix) {
+    for (var row = 0; row < 9; row++) {
+        for (var col = 0; col < 9; col++) {
+            if (emptyCells[row * 9 + col] === null) {
+                for (var val = 1; val <= 9; val++) {
+                    // Check if it is safe to fill
+                    if (fillingCheckAlgo(row, col, val)) {
+                        matrix[row][col] = val;
+                        emptyCells[row * 9 + col] = 1;
+
+                        //update the ui
+
+                        inp1[row * 9 + col].value = val;
+
+                        var solveFurther = solve11(matrix);
+
+                        if (solveFurther) {
+                            return true;
+                        } else {
+                            matrix[row][col] = null;
+                            emptyCells[row * 9 + col] = null;
+                            inp1[row * 9 + col].value = "";
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 function checkAllCellsFilled() {
 
@@ -536,79 +590,13 @@ function checkAllCellsFilled() {
             return false;
         }
     }
-
+ 
+    console.log("empty cells0 sdsdsdsd", emptyCells)
+    console.log("empty cells0  edit 00 sds d", emptyCellsForEditing)
 
     return true;
 
 }
-
-
-// function checkWinner() {
-//     var num;
-//     var val;
-
-
-//     if (checkAllCellsFilled()) {
-
-
-
-
-//         for (var i = 0; i < 9; i++) {
-
-
-//             for (var j = 0; j < 9; j++) {
-//                 num = i * 9 + j;
-//                 val = inp1[num];
-
-//                 if (emptyCells[num] == null) {
-
-//                     if (fillingCheckAlgo(i, j, val) == false) {
-
-
-//                         //not winner
-//                         console.log("Not Won till Now",fillingCheckAlgo(i, j, val))
-//                         return false;
-//                     }
-//                 }
-
-
-
-
-
-
-//             }
-//         }
-
-//         //game won if all the values placed corredtly
-//         console.log("You won")
-//         return true;
-
-//     }
-// }
-
-
-function showAns() {
-    for (var i = 0; i < 9; i++) {
-        for (var j = 0; j < 9; j++) {
-
-
-            
-
-            num = i * 9 + j;
-            if (emptyCells[num]==null){
-                var ans=fill(i,j);
-                matrix[i][j]=ans;
-                inp1[num].value=ans;
-            }
-
-        }
-    }
-
-    console.log(matrix);
-
-    checkWinner();
-}
-
 
 
 function checkWinner() {
@@ -618,42 +606,123 @@ function checkWinner() {
     if (checkAllCellsFilled()) {
         for (var i = 0; i < 9; i++) {
             for (var j = 0; j < 9; j++) {
-                num = i * 9 + j;
-                val = parseInt(inp1[num].value);
-
-                if (emptyCells[num] === null) {
-                    if (!fillingCheckAlgo(i, j, val)) {
-                        // Not a winner
-                        console.log("Not Won till Now");
-                        return false;
-                    }
+               
+                if (matrix[i][j]!=ans[i][j]){
+                    console.log("You Lose")
+                    return false;
                 }
+               
             }
         }
 
-        // Game won if all values are placed correctly
-        console.log("You won!");
+        // game won if all the values placed correctly
+        console.log("You won");
+
+
+        //display the popup if game won
+        displayPopUp();
+
+
+
         return true;
     }
-
-    // Not a winner if not all cells are filled
-    return false;
 }
 
+function displayPopUp(){
+    winMusic.currentSrc=0;
+    winMusic.play();
+    var sudWrap=document.getElementById("sudokuWrapper");
+    var btnControl=document.getElementById("containerControls");
+    var popup=document.getElementById("popup")
+
+    sudWrap.style="filter: blur(8px); -webkit-filter: blur(8px);";
+    btnControl.style="filter: blur(8px); -webkit-filter: blur(8px);";
+    popup.style.display="flex"
+
+}
+
+function newGame(){
+    location.reload();
+}
+
+//new game event listener
+var ng=document.getElementById("newGame");
+ng.addEventListener("click",newGame);
+
+var butx=document.getElementsByClassName("butX");
+butx[0].addEventListener("click",newGame);
 
 
-function simulate() {
+//reveal ans
 
-    //function to randomly fill all the cells of the sudoku
+function revealAns(){
+
+    var sudWrap=document.getElementById("sudokuWrapper");
+    var btnControl=document.getElementById("containerControls");
+    var counter=document.getElementById("ansReveal");
+    counter.style.display="none";
 
 
-    for (var i = 0; i < 81; i++) {
-        var num = Math.floor(Math.random() * 10)
+    sudWrap.style="filter: blur(0); -webkit-filter: blur(0);";
+    btnControl.style="filter: blur(0); -webkit-filter: blur(0);"
+    for (var i=0;i<9;i++){
 
-        if (emptyCells[i] == null) {
-            inp1[i].value = num
+
+        for (var j=0;j<9;j++){
+            var index=i*9+j;
+            matrix[i][j]=ans[i][j];
+
+            inp1[index].value=ans[i][j];
+
+
         }
     }
-    checkWinner();
 }
-showAns();
+
+function countdownAns(){
+    var sudWrap=document.getElementById("sudokuWrapper");
+    var btnControl=document.getElementById("containerControls");
+
+    var popup=document.getElementById("popup")
+
+    sudWrap.style="filter: blur(8px); -webkit-filter: blur(8px);";
+    btnControl.style="filter: blur(8px); -webkit-filter: blur(8px);";
+
+    var count=document.getElementById("ansReveal");
+    count.style.display="block";
+
+    var countdown=3;
+    count.textContent = countdown;
+    countMusic.currentSrc=0;
+    var countdownInterval = setInterval(function () {
+        countdown--;
+        countMusic.currentSrc=0;
+        countMusic.play();
+        count.textContent = countdown;
+
+        if (countdown <= 0) {
+            countMusic.pause();
+            clearInterval(countdownInterval);
+            // document.body.removeChild(countdownDisplay);
+
+            // Add your logic to reveal the answer here
+            revealAns();
+        }
+    }, 1000);
+
+    
+}
+
+var ans1=document.getElementById("ans");
+ans1.addEventListener("click",countdownAns)
+
+
+
+
+console.log("Matrix 1", matrix)
+console.log("empty cells ", emptyCells)
+console.log("empty cells edit", emptyCellsForEditing)
+console.log("ans", ans)
+
+
+// solve11(matrix)

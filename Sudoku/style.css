@@ -8,19 +8,42 @@
     --inpHeight: calc(calc(var(--height)/3)/3);
 
 }
-h1{
-    text-align: center;
-    font-size: 40px;
+
+#head {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    align-items: center;
 }
 
-.mainWrapper{
-    display: flex;
-    justify-content:space-evenly;
+#sudoku {
+    height: 150px;
+
 }
+
+.mainWrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #container {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* filter: blur(8px);
+    -webkit-filter: blur(8px); */
+
+
+}
+
+#containerControls {
+    /* filter: blur(8px);
+    -webkit-filter: blur(8px);  */
+    text-align: center;
+    border: 1px solid black;
+    padding: 20px;
+    background-color: aliceblue;
+    border-radius: 5px;
 }
 
 #row1,
@@ -39,7 +62,9 @@ h1{
     width:calc(var(--width)); */
     width: auto;
     height: auto;
-    
+
+
+
 }
 
 #block11,
@@ -58,6 +83,7 @@ h1{
     grid-template-columns: repeat(3, 1fr);
     box-sizing: border-box;
 
+
 }
 
 .inp {
@@ -69,23 +95,25 @@ h1{
     font-size: 20px;
     font-weight: bold;
     position: relative;
+    border: .5px solid rgb(216, 230, 255);
 
 }
 
-.inp:active{
+.inp:active {
     border: none;
-    background-color: yellow;
+    background-color: rgb(24, 230, 147);
 
-    
+
 }
-.inp:focus{
-    border: none;
-    
-    background-color: yellow;
+
+.inp:focus {
+
+    outline: none;
+    background-color: rgb(132, 220, 24);
 }
 
 .inp:hover {
-    
+    background-color: aquamarine;
     cursor: default;
 }
 
@@ -137,39 +165,154 @@ h1{
 
 }
 
-#buttons{
-display: grid;
-grid-template-columns: repeat(3,1fr);
-border: 1px solid red;
-grid-column-gap: 20px;
-grid-row-gap: 20px;
+#buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* border: 1px solid rgb(42, 14, 99); */
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
 }
 
-.but{
+.but {
     height: 50px;
     width: 50px;
-    background-color: aliceblue;
-    border: 1px solid grey;
+    background-color: rgb(17, 233, 249);
+    /* border: 1px solid grey; */
     text-align: center;
     line-height: 50px;
     font-size: 25px;
-    border-radius: 5px;
+    border-radius: 2px;
+    font-weight: bold;
+    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.butX{
-    height: 50px; 
+.butX {
+    height: 50px;
     margin-top: 20px;
-    background-color: aliceblue;
+    background-color: rgb(100, 232, 113);
     border: 1px solid grey;
     text-align: center;
     line-height: 50px;
     font-size: 25px;
     border-radius: 5px;
+    color: white;
+    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.but:hover{
-    background-color: rgb(124, 149, 171);
+#ans{
+    height: 50px;
+    margin-top: 20px;
+    background-color: rgb(255, 107, 43);
+    border: 1px solid grey;
+    text-align: center;
+    line-height: 50px;
+    font-size: 25px;
+    border-radius: 5px;
+    color: white;
+    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
-.butX:hover{
+
+#ans:hover{
+    background-color: rgb(246, 130, 80);
+    cursor: pointer;
+}
+
+.but:hover {
+    background-color: rgb(255, 208, 19);
+    cursor: pointer;
+    color: white;
+}
+
+.butX:hover {
     background-color: rgb(124, 149, 171);
+    cursor: pointer;
+}
+
+
+/*   popup   */
+
+#popup {
+    position: absolute;
+    top: 33%;
+    left: 33%;
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #feffe4;
+    border-radius: 10px;
+    border: 1px solid rgb(217, 206, 255);
+    display: none;
+}
+
+#message {
+    font-size: 40px;
+    font-family: cursive;
+    color: red;
+}
+
+#newGame {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(243, 66, 77);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: bold;
+    user-select: none;
+}
+
+#newGame:hover {
+    cursor: pointer;
+    background-color: rgb(250, 62, 150);
+}
+
+#star {
+    height: 50px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+}
+
+
+#main-star {
+    height: 80px;
+    padding: 0;
+    margin: 0;
+
+}
+
+
+
+/* ans reveal countdown */
+#ansReveal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 150px;
+  
+   font-weight: 700;;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #feffe4; */
+ 
+    
+    color: grey;
+    font-family: Arial, Helvetica, sans-serif;
+    display: none;
+    
+   
+    
 }
