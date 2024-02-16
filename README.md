@@ -21,8 +21,7 @@ Welcome to the colorful Sudoku game created using HTML, CSS, and JavaScript. Tes
 4. Click "Reveal" if you need help or want to check the solution.
 
 ## Screenshots
-
-[Add some colorful screenshots of your Sudoku game here]
+![Screenshot (39)](https://github.com/amit0-git/Sudoku/assets/54703731/57aa0b81-b542-4df0-bc7e-b453f6824da8)
 
 ## Getting Started
 
@@ -36,10 +35,15 @@ Welcome to the colorful Sudoku game created using HTML, CSS, and JavaScript. Tes
 3. Start playing Sudoku!
 
 ### Developer
-<img src="https://github.com/amit0-git/Sudoku/assets/developer.gif" alt="Amit Verma" width="150" height="150">
+<img src="assets/developer.gif" alt="Amit Verma" width="150" height="150">
+
 Amit Verma
 
-LinkedIn: Amit Verma
-GitHub: amit0-git
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/amitk007/)
+&nbsp;
+[![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/amit0-git/Sudoku)
+
+
 ### License
 This Sudoku game is licensed under the MIT License.
+
