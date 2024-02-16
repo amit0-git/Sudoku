@@ -5,16 +5,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sudoku</title>
+
+  <meta name="description" content="Simple Sudoku game using HTML,CSS,JS">
+  <meta name="author" content="Amit Verma">
+  <meta name="robots" content="index,follow">
+
+  <meta name="keywords" content="sudoku sudokugame puzzle">
+  <!-- meta sharing -->
+
+  <meta property="og:title" content="Sudoku">
+  <meta property="og:description" content="Simple Sudoku game using HTML,CSS,JS">
+  <meta property="og:image" content="https://static.vecteezy.com/system/resources/previews/009/377/212/large_2x/sudoku-logo-poster-design-free-vector.jpg">
+  <meta property="og:url" content="https://tic-tac-toe-s38s.onrender.com/">
+
+  <!-- twitter sharing -->
+
+  <meta name="twitter:card" content="Sudoku">
+  <meta name="twitter:title" content="Sudoku">
+  <meta name="twitter:description" content="Simple Sudoku game using HTML,CSS,JS">
+  <meta name="twitter:image" content="https://static.vecteezy.com/system/resources/previews/009/377/212/large_2x/sudoku-logo-poster-design-free-vector.jpg">
+
+
+  <link rel="icon" href="assets/pastime.png" type="image/png">
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="android.css">
+
+
 
 </head>
 
 <body>
-  <div id="head"><img src="assets/sudoku.png" id="sudoku" alt="" srcset=""></div>
+
+  <div id="loader">
+    <img src="assets/loading.gif" alt="">
+  </div>
  
 
+  <div id="main">
+
+ 
+  <div id="head"><img src="assets/sudoku.png" id="sudoku" alt="" srcset=""></div>
+
   <div class="mainWrapper">
+   
     <div id="container">
 
       <div id="sudokuWrapper">
@@ -59,13 +93,27 @@
       <div id="message">Congratulations! You won.</div>
       <div id="newGame">New Game</div>
     </div>
-    
+
     <div id="ansReveal">
-      
+
     </div>
+
+
+    <div id="developer">
+      &#169;❤️ 2024 Amit Verma
+    </div>
+
+    <a href="https://www.linkedin.com/in/amitk007/">
+      <div id="linkedin"></div>
+    </a>
+
+    <a href="https://github.com/amit0-git/Sudoku">
+      <div id="github"></div>
+    </a>
+
   </div>
 
- 
+</div>
 
 
   <script src="main.js"></script>

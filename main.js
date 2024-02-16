@@ -1,3 +1,19 @@
+window.onload = function () {
+    ///display the before the page load
+
+    var load = document.getElementById("loader");
+    var main = document.getElementById("main");
+
+    // Hide loader and show main content after the entire page has loaded
+    load.style.display = "none";
+    main.style.display = "block";
+    console.log('JavaScript has completely loaded.');
+};
+
+
+
+
+
 var cell = [null, null]
 var errorCount = 0;
 var emptyCells = new Array(81).fill(null);
@@ -14,7 +30,7 @@ var tmpErrorCord = []
 function createInputBoxes(row, blockNumber) {
     //function to create input boxes
     var blockId = "block" + row + blockNumber;
-    console.log(blockId)
+    // console.log(blockId)
     var block = document.getElementById(blockId);
 
 
@@ -402,7 +418,7 @@ Array.from(but).forEach((element) => {
 function fillCell(event) {
 
     console.log("Control Clicked", event.target.textContent)
-    console.log("editing", emptyCellsForEditing)
+    // console.log("editing", emptyCellsForEditing)
 
     var r = cell[0];
     var c = cell[1];
@@ -591,8 +607,8 @@ function checkAllCellsFilled() {
         }
     }
  
-    console.log("empty cells0 sdsdsdsd", emptyCells)
-    console.log("empty cells0  edit 00 sds d", emptyCellsForEditing)
+    // console.log("empty cells0 sdsdsdsd", emptyCells)
+    // console.log("empty cells0  edit 00 sds d", emptyCellsForEditing)
 
     return true;
 
@@ -719,10 +735,10 @@ ans1.addEventListener("click",countdownAns)
 
 
 
-console.log("Matrix 1", matrix)
-console.log("empty cells ", emptyCells)
-console.log("empty cells edit", emptyCellsForEditing)
-console.log("ans", ans)
+// console.log("Matrix 1", matrix)
+// console.log("empty cells ", emptyCells)
+// console.log("empty cells edit", emptyCellsForEditing)
+// console.log("ans", ans)
 
 
 // solve11(matrix)

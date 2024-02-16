@@ -9,6 +9,22 @@
 
 }
 
+#main{
+    display: none;
+}
+#loader {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #loader img {
+    height: 200px;
+  }
+
+
+
 #head {
     display: flex;
     justify-content: center;
@@ -24,6 +40,7 @@
 .mainWrapper {
     display: flex;
     justify-content: space-evenly;
+    height: 100%;
 }
 
 #container {
@@ -315,4 +332,36 @@
     
    
     
+}
+
+#github{
+    background-image: url("assets/github.png");
+    height: 40px;
+    width: 40px;
+
+    background-size: cover;
+    position: absolute;
+    bottom:10px ;
+    right: 10px;
+}
+#linkedin{
+    background-image: url("assets/linkedin.png");
+    height: 40px;
+    width: 40px;
+
+    background-size: cover;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;;
+}
+
+#developer{
+    position: absolute;
+     
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 10px;
+    width: 200px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: grey;
 }

@@ -77,16 +77,46 @@
         font-family: Arial, Helvetica, sans-serif;
     }
 
-    .butX {
-        height: 30px;
+    /* .butX {
+        height: 50px;
         margin-top: 20px;
-        padding: 5px;
-        width: 180px;
         background-color: rgb(100, 232, 113);
         border: 1px solid grey;
         text-align: center;
-        line-height: 30px;
-        font-size: 20px;
+        line-height: 50px;
+        font-size: 25px;
+        border-radius: 5px;
+        color: white;
+        user-select: none;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    #ans{
+        height: 50px;
+        margin-top: 20px;
+        background-color: rgb(255, 107, 43);
+        border: 1px solid grey;
+        text-align: center;
+        line-height: 50px;
+        font-size: 25px;
+        border-radius: 5px;
+        color: white;
+        user-select: none;
+        font-family: Arial, Helvetica, sans-serif;
+    } */
+
+
+
+    .butX {
+        height: 20px;
+        margin-top: 10px;
+        padding: 5px;
+        width: 150px;
+        background-color: rgb(100, 232, 113);
+        border: 1px solid grey;
+        text-align: center;
+        line-height: 20px;
+        font-size: 18px;
         border-radius: 5px;
         color: white;
         font-weight: bold;
@@ -94,16 +124,16 @@
         font-family: Arial, Helvetica, sans-serif;
     }
     #ans{
-        height: 30px;
-        width: 180px;
-        margin-top: 20px;
+        height: 20px;
+        width: 150px;
+        margin-top: 10px;
         padding: 5px;
         background-color: rgb(255, 107, 43);
         border: 1px solid grey;
         text-align: center;
         font-weight: bold;
-        line-height: 30px;
-        font-size: 20px;
+        line-height: 20px;
+        font-size: 18px;
         border-radius: 5px;
         color: white;
         user-select: none;
@@ -172,7 +202,29 @@
     margin: 0;
 
 }
+#linkedin{
+       
+    height: 30px;
+    width: 30px;
+    bottom: 5px;
+ 
+}
 
-
+#github{
+    
+    height: 30px;
+    width: 30px;
+    bottom: 5px;
+    
+}
+#developer{
+    position: absolute;
+    
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 5px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: grey;
+}
 
 }
