@@ -9,11 +9,21 @@
         --inpHeight: calc(calc(var(--height)/3)/3);
 
     }
+    #sudoku {
+        height: 120px;
+    
+    }
+    #main {
+        position: relative;
+    }
 
     .mainWrapper {
         display: flex;
         flex-direction: column;
+        margin-top: 1px;
+        /* height: 100%; */
     }
+
     #sudokuWrapper {
         border: 1px solid black;
         /* height:var(--height);
@@ -21,11 +31,11 @@
         /* height:calc(var(--height));
         width:calc(var(--width)); */
         width: auto;
-        height: auto;
-        
-    
-    
-    
+        /* height: 100%; */
+
+
+
+
     }
 
 
@@ -33,11 +43,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
         /* filter: blur(8px);
         -webkit-filter: blur(8px); */
-    
-    
+
+
     }
 
 
@@ -47,21 +57,22 @@
     #containerControls {
         /* filter: blur(8px);
         -webkit-filter: blur(8px);  */
-        margin-top: 30px;
+        margin-top: 10px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding: 10px;
         background-color: aliceblue;
         border-radius: 5px;
     }
 
     #buttons {
         display: grid;
-        grid-template-columns: repeat(9, 1fr);
-       
-        grid-column-gap: 10px;
-        grid-row-gap: 10px;
+        grid-template-columns: repeat(5, 1fr);
+
+        grid-column-gap: 5px;
+        grid-row-gap: 5px;
     }
 
     .but {
@@ -108,32 +119,33 @@
 
 
     .butX {
-        height: 20px;
+        height: 15px;
         margin-top: 10px;
         padding: 5px;
-        width: 150px;
+        width: 120px;
         background-color: rgb(100, 232, 113);
         border: 1px solid grey;
         text-align: center;
-        line-height: 20px;
-        font-size: 18px;
+        line-height: 15px;
+        font-size: 15px;
         border-radius: 5px;
         color: white;
         font-weight: bold;
         user-select: none;
         font-family: Arial, Helvetica, sans-serif;
     }
-    #ans{
-        height: 20px;
-        width: 150px;
+
+    #ans {
+        height: 15px;
+        width: 120px;
         margin-top: 10px;
         padding: 5px;
         background-color: rgb(255, 107, 43);
         border: 1px solid grey;
         text-align: center;
         font-weight: bold;
-        line-height: 20px;
-        font-size: 18px;
+        line-height: 15px;
+        font-size: 15px;
         border-radius: 5px;
         color: white;
         user-select: none;
@@ -144,87 +156,86 @@
 
     /*   popup   */
 
-#popup {
-    position: absolute;
-    
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    text-align: center;
-    padding-left: 20px;
-    padding-right: 20px;
-    height: 250px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #feffe4;
-    border-radius: 10px;
-    border: 1px solid rgb(217, 206, 255);
-    display: none;
-}
+    #popup {
+        position: absolute;
 
-#message {
-    font-size: 40px;
-    font-family: cursive;
-    color: red;
-}
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        text-align: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 250px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #feffe4;
+        border-radius: 10px;
+        border: 1px solid rgb(217, 206, 255);
+        display: none;
+    }
 
-#newGame {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: rgb(243, 66, 77);
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    font-weight: bold;
-}
+    #message {
+        font-size: 40px;
+        font-family: cursive;
+        color: red;
+    }
 
-#newGame:hover {
-    cursor: pointer;
-    background-color: rgb(250, 62, 150);
-}
+    #newGame {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: rgb(243, 66, 77);
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        font-weight: bold;
+    }
 
-#star {
-    height: 50px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+    #newGame:hover {
+        cursor: pointer;
+        background-color: rgb(250, 62, 150);
+    }
 
-}
+    #star {
+        height: 50px;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+
+    }
 
 
-#main-star {
-    height: 80px;
-    padding: 0;
-    margin: 0;
+    #main-star {
+        height: 80px;
+        padding: 0;
+        margin: 0;
+    }
 
-}
-#linkedin{
-       
-    height: 30px;
-    width: 30px;
-    bottom: 5px;
- 
-}
+    #bottom {
+        width: 100%;
+        position: relative;
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-#github{
-    
-    height: 30px;
-    width: 30px;
-    bottom: 5px;
-    
-}
-#developer{
-    position: absolute;
-    
-    left: 50%;
-    transform: translate(-50%, -50%);
-    bottom: 5px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: grey;
-}
+    }
 
+    #linkedin,
+    #github {
+        margin-top: 10px;
+        /* Adjusted margin for better spacing */
+        height: 30px;
+        width: 30px;
+    }
+
+    #developer {
+        margin-top: 10px;
+        /* Adjusted margin for better spacing */
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        color: grey;
+    }
 }
