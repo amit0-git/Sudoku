@@ -707,7 +707,7 @@ function countdownAns(){
     var count=document.getElementById("ansReveal");
     count.style.display="block";
 
-    var countdown=3;
+    var countdown=30;
     count.textContent = countdown;
     countMusic.currentSrc=0;
     var countdownInterval = setInterval(function () {
